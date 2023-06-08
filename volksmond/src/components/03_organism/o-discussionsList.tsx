@@ -36,7 +36,7 @@ const DiscussionsList: React.FC<Props> = () => {
             photo: { value: string }
         };
 
-        const citizen: IProblemData = {
+        const problem: IProblemData = {
             id: target.id?.value,
             citizenId: target.citizenId?.value,
             title: target.title?.value,
@@ -44,7 +44,7 @@ const DiscussionsList: React.FC<Props> = () => {
             postDate: target.postDate?.value
         };
 
-        ProblemDataService.create(citizen)
+        ProblemDataService.create(problem)
             .then((response: any) => {
                 setProblems([...problems, response.data]);
                 console.log(response.data);

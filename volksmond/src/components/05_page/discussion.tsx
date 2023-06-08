@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import CitizenDataService from "../../services/citizen.service";
-import ICitizenData from '../../types/citizen';
+import ProblemDataService from "../../services/problem.service";
+import IProblemData from '../../types/problem';
 import '../../styles/03_organism/o-solutionsList.scss'
 import '../../styles/02_molecule/m-commentsList.scss'
 
 type Props = {};
 
 const DiscussionPage: React.FC<Props> = () => {
-    const [citizens, setCitizens] = useState<ICitizenData[]>([]);
+    const [problems, setProblems] = useState<IProblemData>();
 
     useEffect(() => {
         retrieveAllCitizens();
     }, []);
 
     const retrieveAllCitizens = (): void => {
-        CitizenDataService.getAll()
+        ProblemDataService.get(1)
             .then((response: any) => {
-                setCitizens(response.data);
+                setProblems(response.data);
                 console.log(response.data);
             })
             .catch((e: Error) => {
@@ -29,25 +29,25 @@ const DiscussionPage: React.FC<Props> = () => {
 
         const target = e.target as typeof e.target & {
             id?: { value: Uint32Array },
-            firstname: { value: string },
-            lastname: { value: string },
-            dateOfBirth?: { value: Date },
+            citizenId?: { value: Uint32Array },
+            title: { value: string },
+            description: { value: string },
+            postDate?: { value: Date },
             gender: { value: string },
             photo: { value: string }
         };
 
-        const citizen: ICitizenData = {
+        const problem: IProblemData = {
             id: target.id?.value,
-            firstname: target.firstname.value,
-            lastname: target.lastname.value,
-            dateOfBirth: target.dateOfBirth?.value,
-            gender: target.gender.value,
-            photo: target.photo.value
+            citizenId: target.citizenId?.value,
+            title: target.title?.value,
+            description: target.description?.value,
+            postDate: target.postDate?.value
         };
 
-        CitizenDataService.create(citizen)
+        ProblemDataService.create(problem)
             .then((response: any) => {
-                setCitizens([...citizens, response.data]);
+                setProblems(response.data);
                 console.log(response.data);
             })
             .catch((e: Error) => {
@@ -60,17 +60,17 @@ const DiscussionPage: React.FC<Props> = () => {
         const target = e.target as typeof e.target & {
             id: { value: number }
         };
-        CitizenDataService.delete(target.id.value);
+        ProblemDataService.delete(target.id.value);
     };
 
     return (
         <div>
-            <h1>Viva La Revolution</h1>
-            <span>Che Guevara</span>
+            <h1>{problems?.title}</h1>
+            <span>CitizenId {problems?.citizenId}</span>
             <p>
-                How should we stop the American oppression of Cuba?
+                {problems?.description}
             </p>
-            <strong>Referendum starts 20/7/2023</strong>
+            <strong>Referendum starts {problems?.postDate?.toString()}</strong>
 
             <h2>Suggested solutions</h2>
             <div className="o-solutionsList">

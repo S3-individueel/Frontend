@@ -6,7 +6,7 @@ class ProblemDataService {
         return http.get<Array<IProblemData>>("/Problems");
     }
 
-    get(id: string) {
+    get(id: any) {
         return http.get<IProblemData>(`/Problems/${id}`);
     }
 

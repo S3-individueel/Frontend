@@ -6,7 +6,7 @@
         background-color: #1C252D;
         border: 1px solid #303F4D;
         display: flex;
-        align-items: center;        
+        align-items: center;
         transition: .2s;
 
         input {
@@ -29,12 +29,17 @@
             margin-right: .6rem;
             img {
                 width: 25px;
-                filter: invert(44%) sepia(94%) saturate(833%) hue-rotate(350deg) brightness(103%) contrast(101%);
+                filter: invert(44%) sepia(0) saturate(0) hue-rotate(0) brightness(0) contrast(0);
             }
         }
 
         &:focus-within {
             border: 1px solid #FF7514;
+            button {
+                img {
+                    filter: invert(44%) sepia(94%) saturate(833%) hue-rotate(350deg) brightness(103%) contrast(101%);
+                }
+            }
         }
     }
 }
