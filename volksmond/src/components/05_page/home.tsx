@@ -71,6 +71,7 @@ const HomePage: React.FC<Props> = () => {
             ))}
 
             <form name="citizen" onSubmit={postCitizen}>
+                <input name="id" type="hidden" defaultValue="0"></input>
                 <input name="firstname" defaultValue="Che" type="text" id="firstname" placeholder="firstname"></input>
                 <input name="lastname" defaultValue="Guevara" type="text" id="lastname" placeholder="lastname"></input>
                 <input name="dateOfBirth" defaultValue="2023-06-01T00:27:22.626Z" type="text" id="dateOfBirth" placeholder="date of birth"></input>
