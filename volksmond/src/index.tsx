@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 // PAGES
-import HomePage from './home';
+import HomePage from './components/05_page/home';
 
 const router = createBrowserRouter([
   {

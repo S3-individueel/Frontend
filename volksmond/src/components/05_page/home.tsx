@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import CitizenDataService from "./services/citizen.service";
-import ICitizenData from './types/citizen';
+import CitizenDataService from "../../services/citizen.service";
+import ICitizenData from '../../types/citizen';
 
 type Props = {};
 
