@@ -1,0 +1,40 @@
+.a-searchBar {
+    margin: 0 auto;
+    form {
+        height: 100%;
+        border-radius: 25px;
+        background-color: #1C252D;
+        border: 2px solid #303F4D;
+        display: flex;
+        align-items: center;        
+        transition: .2s;
+
+        input {
+            height: 100%;
+            width: 300px;
+            border: none;
+            background-color: unset;
+            color: white;
+            padding: .6rem 1.3rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+        button {
+            height: 100%;
+            border: none;
+            background-color: unset;
+            cursor: pointer;
+            margin-right: .6rem;
+            img {
+                width: 25px;
+                filter: invert(44%) sepia(94%) saturate(833%) hue-rotate(350deg) brightness(103%) contrast(101%);
+            }
+        }
+
+        &:focus-within {
+            border: 2px solid #FF7514;
+        }
+    }
+}
