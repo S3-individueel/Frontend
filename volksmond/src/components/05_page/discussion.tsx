@@ -3,18 +3,20 @@ import ProblemDataService from "../../services/problem.service";
 import IProblemData from '../../types/problem';
 import '../../styles/03_organism/o-solutionsList.scss'
 import '../../styles/02_molecule/m-commentsList.scss'
+import { useParams } from "react-router-dom";
 
 type Props = {};
 
 const DiscussionPage: React.FC<Props> = () => {
     const [problems, setProblems] = useState<IProblemData>();
+    const { discussionId } = useParams<{ discussionId: string }>();
 
     useEffect(() => {
         retrieveAllCitizens();
     }, []);
 
     const retrieveAllCitizens = (): void => {
-        ProblemDataService.get(1)
+        ProblemDataService.get(discussionId)
             .then((response: any) => {
                 setProblems(response.data);
                 console.log(response.data);
