@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import CitizenDataService from "../../services/citizen.service";
 import ICitizenData from '../../types/citizen';
-import '../../styles/03_organism/o-discussionsList.scss';
+import '../../styles/03_organism/o-solutionsList.scss'
+import '../../styles/02_molecule/m-commentsList.scss'
 
 type Props = {};
 
-const CitizensList: React.FC<Props> = () => {
+const DiscussionPage: React.FC<Props> = () => {
     const [citizens, setCitizens] = useState<ICitizenData[]>([]);
 
     useEffect(() => {
@@ -64,43 +65,52 @@ const CitizensList: React.FC<Props> = () => {
 
     return (
         <div>
-            <h1>Discussions</h1>
-            <div className="o-discussionsList">
-                <div className="o-discussionsList__card">
-                    <h2>Viva La Revolution</h2>
-                    <span>Che Guevara</span>
+            <h1>Viva La Revolution</h1>
+            <span>Che Guevara</span>
+            <p>
+                How should we stop the American oppression of Cuba?
+            </p>
+            <strong>Referendum starts 20/7/2023</strong>
+
+            <h2>Suggested solutions</h2>
+            <div className="o-solutionsList">
+                <div className="o-solutionsList__card">
+                    <h3>Throw rotten eggs!</h3>
+                    <span>Pietje Bel</span>
                     <p>
-                        How should we stop the American opression of Cuba?
+                        We should throw rotten eggs at the rich people's yaughts.
                     </p>
-                    <a href="#">See discussions</a>
-                </div>
-                <div className="o-discussionsList__card">
-                    <h2>Viva La Revolution</h2>
-                    <span>Che Guevara</span>
-                    <p>
-                        How should we stop the American opression of Cuba?
-                    </p>
-                    <a href="#">See discussions</a>
-                </div>
-                <div className="o-discussionsList__card">
-                    <h2>Viva La Revolution</h2>
-                    <span>Che Guevara</span>
-                    <p>
-                        How should we stop the American opression of Cuba?
-                    </p>
-                    <a href="#">See discussions</a>
-                </div>
-                <div className="o-discussionsList__card">
-                    <h2>Viva La Revolution</h2>
-                    <span>Che Guevara</span>
-                    <p>
-                        How should we stop the American opression of Cuba?
-                    </p>
-                    <a href="#">See discussions</a>
+
+                    <div className="m-commentsList">
+                        <span>User</span>
+                        <p>Lorem ipsum sample text comment sentence.</p>
+                        <div>
+                            <span>User</span>
+                            <p>Lorem ipsum sample text comment sentence.</p>
+                            <div>
+                                <span>User</span>
+                                <p>Lorem ipsum sample text comment sentence.</p>
+                                <div>
+                                    <span>User</span>
+                                    <p>Lorem ipsum sample text comment sentence.</p>
+                                </div>
+                            </div>
+                            <span>User</span>
+                            <p>Lorem ipsum sample text comment sentence.</p>
+
+                            <span>User</span>
+                            <p>Lorem ipsum sample text comment sentence.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span>-19 points</span>
+                        <a href="#">See all comments</a>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default CitizensList;
+export default DiscussionPage;

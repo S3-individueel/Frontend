@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CitizenDataService from "../../services/citizen.service";
 import ICitizenData from '../../types/citizen';
+import DiscussionsList from '../03_organism/o-discussionsList'
 
 type Props = {};
 
@@ -63,6 +64,8 @@ const HomePage: React.FC<Props> = () => {
 
     return (
         <div>
+            <h1>Discussions</h1>
+            <DiscussionsList />
             {citizens.map((citizen: ICitizenData, index: number) => (
                 <h2 key={index}>#{citizen.id + " " + citizen.firstname + ' ' + citizen.lastname}</h2>
             ))}

@@ -1,0 +1,44 @@
+.o-solutionsList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+    &__card {
+        background-color: #283440;
+        border-radius: 25px;
+        padding: 20px;
+        border: 1px solid #303F4D;
+
+        h3 {
+
+        }
+        > span {
+            font-style: italic;
+            font-size: .8rem;
+            color: grey;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        
+        > div:last-of-type{
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            span {
+
+            }
+            a {
+                display: inline-block;
+                margin-left: auto;
+                font-weight: bolder;
+                color: white;
+                text-decoration: none;
+                background-color: #FF7514;
+                border-radius: 25px;
+                padding: .4rem .8rem;
+                font-size: .9rem;
+            }
+        }
+    }
+}
