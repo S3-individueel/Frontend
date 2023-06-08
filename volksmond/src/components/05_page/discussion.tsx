@@ -4,6 +4,7 @@ import IProblemData from '../../types/problem';
 import '../../styles/03_organism/o-solutionsList.scss'
 import '../../styles/02_molecule/m-commentsList.scss'
 import { useParams } from "react-router-dom";
+import SolutionsList from "../03_organism/o-solutionsList";
 
 type Props = {};
 
@@ -75,42 +76,8 @@ const DiscussionPage: React.FC<Props> = () => {
             <strong>Referendum starts {problems?.postDate?.toString()}</strong>
 
             <h2>Suggested solutions</h2>
-            <div className="o-solutionsList">
-                <div className="o-solutionsList__card">
-                    <h3>Throw rotten eggs!</h3>
-                    <span>Pietje Bel</span>
-                    <p>
-                        We should throw rotten eggs at the rich people's yaughts.
-                    </p>
-
-                    <div className="m-commentsList">
-                        <span>User</span>
-                        <p>Lorem ipsum sample text comment sentence.</p>
-                        <div>
-                            <span>User</span>
-                            <p>Lorem ipsum sample text comment sentence.</p>
-                            <div>
-                                <span>User</span>
-                                <p>Lorem ipsum sample text comment sentence.</p>
-                                <div>
-                                    <span>User</span>
-                                    <p>Lorem ipsum sample text comment sentence.</p>
-                                </div>
-                            </div>
-                            <span>User</span>
-                            <p>Lorem ipsum sample text comment sentence.</p>
-
-                            <span>User</span>
-                            <p>Lorem ipsum sample text comment sentence.</p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <span>-19 points</span>
-                        <a href="#">See all comments</a>
-                    </div>
-                </div>
-            </div>
+            
+            <SolutionsList />
         </div>
     );
 };

@@ -6,7 +6,7 @@ class ReplyDataService {
         return http.get<Array<IReplyData>>("/Replies");
     }
 
-    get(id: string) {
+    get(id: any) {
         return http.get<IReplyData>(`/Replies/${id}`);
     }
 

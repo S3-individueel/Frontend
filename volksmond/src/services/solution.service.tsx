@@ -1,34 +1,34 @@
 import http from "../http-common";
-import ICitizenData from "../types/citizen"
+import ISolutionData from "../types/solution"
 
-class CitizenDataService {
+class SolutionDataService {
     getAll() {
-        return http.get<Array<ICitizenData>>("/Citizens");
+        return http.get<Array<ISolutionData>>("/Solutions");
     }
 
     get(id: string) {
-        return http.get<ICitizenData>(`/Citizens/${id}`);
+        return http.get<ISolutionData>(`/Solutions/${id}`);
     }
 
-    create(data: ICitizenData) {
-        return http.post<ICitizenData>("/Citizens", data);
+    create(data: ISolutionData) {
+        return http.post<ISolutionData>("/Solutions", data);
     }
 
-    update(data: ICitizenData, id: any) {
-        return http.put<any>(`/Citizens/${id}`, data);
+    update(data: ISolutionData, id: any) {
+        return http.put<any>(`/Solutions/${id}`, data);
     }
 
     delete(id: any) {
-        return http.delete<any>(`/Citizens/${id}`);
+        return http.delete<any>(`/Solutions/${id}`);
     }
 
     deleteAll() {
-        return http.delete<any>(`/Citizens`);
+        return http.delete<any>(`/Solutions`);
     }
 
     findByTitle(title: string) {
-        return http.get<Array<ICitizenData>>(`/Citizens?title=${title}`);
+        return http.get<Array<ISolutionData>>(`/Solutions?title=${title}`);
     }
 }
 
-export default new CitizenDataService();
+export default new SolutionDataService();

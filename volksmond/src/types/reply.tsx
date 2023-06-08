@@ -1,4 +1,4 @@
-export default interface ISolutionData {
+export default interface IReplyData {
     id?: any | null,
     citizenId?: any | null,
     solutionId?: any | null,

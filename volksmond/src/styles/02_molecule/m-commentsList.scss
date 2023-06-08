@@ -1,6 +1,6 @@
 .m-commentsList {
-    border-left: 1px solid grey;
-    padding-left: 10px;
+    // border-left: 1px solid grey;
+    // padding-left: 10px;
 
     span {
         font-style: italic;
@@ -13,7 +13,7 @@
         padding-bottom: 3px;
     }
 
-    div {
+    > div {
         border-left: 1px solid grey;
         padding-left: 10px;
     }
