@@ -11,6 +11,7 @@ import {
 // PAGES
 import HomePage from './components/05_page/home';
 import DiscussionPage from './components/05_page/discussion';
+import SolutionPage from './components/05_page/solution';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/discussion/:discussionId",
         element: <DiscussionPage />,
+      },
+      {
+        path: "/solution/:solutionId",
+        element: <SolutionPage />,
       },
     ],
   },

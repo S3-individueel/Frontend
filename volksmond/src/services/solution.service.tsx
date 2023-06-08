@@ -6,8 +6,12 @@ class SolutionDataService {
         return http.get<Array<ISolutionData>>("/Solutions");
     }
 
-    get(id: string) {
+    get(id: any) {
         return http.get<ISolutionData>(`/Solutions/${id}`);
+    }
+
+    getByDiscussionId(id: any) {
+        return http.get<ISolutionData>(`/Problems/${id}/Solutions`);
     }
 
     create(data: ISolutionData) {

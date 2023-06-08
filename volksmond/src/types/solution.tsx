@@ -5,4 +5,6 @@ export default interface ISolutionData {
     title: string,
     text: string,
     score?: any | null,
+    replies?: [{}],
+    votes?: [{}]
 }

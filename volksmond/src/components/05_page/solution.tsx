@@ -8,16 +8,16 @@ import SolutionsList from "../03_organism/o-solutionsList";
 
 type Props = {};
 
-const DiscussionPage: React.FC<Props> = () => {
+const SolutionPage: React.FC<Props> = () => {
     const [problems, setProblems] = useState<IProblemData>();
-    const { discussionId } = useParams<{ discussionId: string }>();
+    const { solutionId } = useParams<{ solutionId: string }>();
 
     useEffect(() => {
-        retrieveAllCitizens();
+        retrieveSolution();
     }, []);
 
-    const retrieveAllCitizens = (): void => {
-        ProblemDataService.get(discussionId)
+    const retrieveSolution = (): void => {
+        ProblemDataService.get(solutionId)
             .then((response: any) => {
                 setProblems(response.data);
                 console.log(response.data);
@@ -68,18 +68,9 @@ const DiscussionPage: React.FC<Props> = () => {
 
     return (
         <div>
-            <h1>{problems?.title}</h1>
-            <span>CitizenId {problems?.citizenId}</span>
-            <p>
-                {problems?.description}
-            </p>
-            <strong>Referendum starts {problems?.postDate?.toString()}</strong>
-
-            <h2>Suggested solutions</h2>
-
-            <SolutionsList discussionId={discussionId}/>
+            <h1>SolutionId {solutionId}</h1>
         </div>
     );
 };
 
-export default DiscussionPage;
+export default SolutionPage;

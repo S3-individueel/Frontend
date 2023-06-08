@@ -4,9 +4,11 @@ import ISolutionData from '../../types/solution';
 import '../../styles/03_organism/o-discussionsList.scss';
 import CommentsList from '../02_molecule/m-commentsList';
 
-type Props = {};
+type Props = {
+    discussionId?: string | null;
+};
 
-const SolutionsList: React.FC<Props> = () => {
+const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
     const [solutions, setSolutions] = useState<ISolutionData[]>([]);
 
     useEffect(() => {
@@ -14,10 +16,11 @@ const SolutionsList: React.FC<Props> = () => {
     }, []);
 
     const retrieveAllSolutions = (): void => {
-        SolutionDataService.getAll()
+        SolutionDataService.getByDiscussionId(discussionId)
             .then((response: any) => {
-                setSolutions(response.data);
-                console.log(response.data);
+                setSolutions([response.data]);
+                console.log("response.data",response.data);
+                console.log("solutions",solutions);
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -34,6 +37,8 @@ const SolutionsList: React.FC<Props> = () => {
             title: { value: string },
             text: { value: string },
             score?: { value: Uint32Array },
+            replies?: { value: [{}] },
+            votes?: { value: any | null },
         };
 
         const solution: ISolutionData = {
@@ -43,6 +48,8 @@ const SolutionsList: React.FC<Props> = () => {
             title: target.title?.value,
             text: target.text.value,
             score: target.score?.value,
+            replies: target.replies?.value,
+            votes: target.votes?.value,
         };
 
         SolutionDataService.create(solution)
@@ -64,32 +71,23 @@ const SolutionsList: React.FC<Props> = () => {
     };
 
     return (
-        // <div className="o-discussionsList">
-        //     {problems.map((problem: ISolutionData, index: number) => (
-        //         <div className="o-discussionsList__card">
-        //             <h2>{problem.title}</h2>
-        //             <span>CitizenId {problem.citizenId}</span>
-        //             <p>{problem.description}</p>
-        //             <a href={"/discussion/" + problem.id}>See discussions</a>
-        //         </div>
-        //     ))}
-        // </div>
-
         <div className="o-solutionsList">
-            {solutions.map((solution: ISolutionData, index: number) => (
-                <div className="o-solutionsList__card" key={index}>
-                    <h3>{ solution.title }</h3>
-                    <span>CitizenId { solution.citizenId }</span>
-                    <p>{ solution.text }</p>
-
-                    <CommentsList />
-
-                    <div>
-                        <span>{ solution.score } points</span>
-                        <a href={ "/solution/" + solution.id }>See all comments</a>
+            {solutions.length > 0 ? (
+                solutions.map((solution: ISolutionData, index: number) => (
+                    <div className="o-solutionsList__card" key={index}>
+                        <h3>{solution.title}</h3>
+                        <span>CitizenId {solution.citizenId}</span>
+                        <p>{solution.text}</p>
+                        <CommentsList />
+                        <div>
+                            <span>{solution.score} points</span>
+                            <a href={"/solution/" + solution.id}>See all comments</a>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))
+            ) : (
+                <div>No solutions found.</div>
+            )}
         </div>
         
     );

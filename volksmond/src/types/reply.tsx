@@ -6,4 +6,6 @@ export default interface IReplyData {
     text: string,
     isDeleted?: boolean,
     isPinned?: boolean,
+    replies?: [{}],
+    votes?: [{}],
 }
