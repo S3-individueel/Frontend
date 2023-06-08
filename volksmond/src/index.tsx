@@ -10,6 +10,7 @@ import {
 
 // PAGES
 import HomePage from './components/05_page/home';
+import DiscussionsPage from './components/05_page/discussions';
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: <HomePage />,
+      },
+      {
+        path: "/",
+        element: <DiscussionsPage />,
       },
     ],
   },

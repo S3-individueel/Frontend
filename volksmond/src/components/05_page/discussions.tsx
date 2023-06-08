@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import CitizenDataService from "../../services/citizen.service";
 import ICitizenData from '../../types/citizen';
+import '../../styles/03_organism/o-discussionsList.scss';
 
 type Props = {};
 
-const HomePage: React.FC<Props> = () => {
+const CitizensList: React.FC<Props> = () => {
     const [citizens, setCitizens] = useState<ICitizenData[]>([]);
 
     useEffect(() => {
@@ -63,27 +64,43 @@ const HomePage: React.FC<Props> = () => {
 
     return (
         <div>
-            {citizens.map((citizen: ICitizenData, index: number) => (
-                <h2 key={index}>#{citizen.id + " " + citizen.firstname + ' ' + citizen.lastname}</h2>
-            ))}
-
-            <form name="citizen" onSubmit={postCitizen}>
-                <input name="firstname" defaultValue="Che" type="text" id="firstname" placeholder="firstname"></input>
-                <input name="lastname" defaultValue="Guevara" type="text" id="lastname" placeholder="lastname"></input>
-                <input name="dateOfBirth" defaultValue="2023-06-01T00:27:22.626Z" type="text" id="dateOfBirth" placeholder="date of birth"></input>
-                <input name="gender" defaultValue="man" type="text" id="gender" placeholder="ender"></input>
-                <input name="photo" defaultValue="" type="text" id="photo" placeholder="photo"></input>
-                <button type="submit">Submit</button>
-            </form>
-
-            <br></br>
-
-            <form onSubmit={deleteCitizen}>
-                <input type="number" name="id" defaultValue="1"></input>
-                <button type="submit">Delete</button>
-            </form>
+            <h1>Discussions</h1>
+            <div className="o-discussionsList">
+                <div className="o-discussionsList__card">
+                    <h2>Viva La Revolution</h2>
+                    <span>Che Guevara</span>
+                    <p>
+                        How should we stop the American opression of Cuba?
+                    </p>
+                    <a href="#">See discussions</a>
+                </div>
+                <div className="o-discussionsList__card">
+                    <h2>Viva La Revolution</h2>
+                    <span>Che Guevara</span>
+                    <p>
+                        How should we stop the American opression of Cuba?
+                    </p>
+                    <a href="#">See discussions</a>
+                </div>
+                <div className="o-discussionsList__card">
+                    <h2>Viva La Revolution</h2>
+                    <span>Che Guevara</span>
+                    <p>
+                        How should we stop the American opression of Cuba?
+                    </p>
+                    <a href="#">See discussions</a>
+                </div>
+                <div className="o-discussionsList__card">
+                    <h2>Viva La Revolution</h2>
+                    <span>Che Guevara</span>
+                    <p>
+                        How should we stop the American opression of Cuba?
+                    </p>
+                    <a href="#">See discussions</a>
+                </div>
+            </div>
         </div>
     );
 };
 
-export default HomePage;
+export default CitizensList;

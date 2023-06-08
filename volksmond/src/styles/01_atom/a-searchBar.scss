@@ -4,7 +4,7 @@
         height: 100%;
         border-radius: 25px;
         background-color: #1C252D;
-        border: 2px solid #303F4D;
+        border: 1px solid #303F4D;
         display: flex;
         align-items: center;        
         transition: .2s;
@@ -34,7 +34,7 @@
         }
 
         &:focus-within {
-            border: 2px solid #FF7514;
+            border: 1px solid #FF7514;
         }
     }
 }

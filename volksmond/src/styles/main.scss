@@ -1,4 +1,16 @@
 //@import '04_template/header.scss';
 body {
     background-color: #1C252D;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+
+    main {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 20px;
+        margin: 0 auto;
+        h1 {
+            margin: 20px 0;
+        }
+    }
 }
