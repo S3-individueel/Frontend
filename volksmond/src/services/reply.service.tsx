@@ -6,6 +6,10 @@ class ReplyDataService {
         return http.get<Array<IReplyData>>("/Replies");
     }
 
+    getBySolutionId(id: any) {
+        return http.get<IReplyData>(`/Solutions/${id}/Replies`);
+    }
+
     get(id: any) {
         return http.get<IReplyData>(`/Replies/${id}`);
     }

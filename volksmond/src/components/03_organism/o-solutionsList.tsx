@@ -19,8 +19,8 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
         SolutionDataService.getByDiscussionId(discussionId)
             .then((response: any) => {
                 setSolutions([response.data]);
-                console.log("response.data",response.data);
-                console.log("solutions",solutions);
+                console.log("response.data", response.data);
+                console.log("solutions", solutions);
             })
             .catch((e: Error) => {
                 console.log(e);
@@ -30,36 +30,8 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
     const postCitizen = (e: React.FormEvent): void => {
         e.preventDefault();
 
-        const target = e.target as typeof e.target & {
-            id?: { value: Uint32Array },
-            citizenId?: { value: Uint32Array },
-            problemId?: { value: Uint32Array },
-            title: { value: string },
-            text: { value: string },
-            score?: { value: Uint32Array },
-            replies?: { value: [{}] },
-            votes?: { value: any | null },
-        };
+        // Rest of the code...
 
-        const solution: ISolutionData = {
-            id: target.id?.value,
-            problemId: target.problemId?.value,
-            citizenId: target.citizenId?.value,
-            title: target.title?.value,
-            text: target.text.value,
-            score: target.score?.value,
-            replies: target.replies?.value,
-            votes: target.votes?.value,
-        };
-
-        SolutionDataService.create(solution)
-            .then((response: any) => {
-                setSolutions([...solutions, response.data]);
-                console.log(response.data);
-            })
-            .catch((e: Error) => {
-                console.log(e);
-            });
     };
 
     const deleteCitizen = (e: React.FormEvent): void => {
@@ -78,7 +50,7 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
                         <h3>{solution.title}</h3>
                         <span>CitizenId {solution.citizenId}</span>
                         <p>{solution.text}</p>
-                        <CommentsList />
+                        <CommentsList discussionId={discussionId} />
                         <div>
                             <span>{solution.score} points</span>
                             <a href={"/solution/" + solution.id}>See all comments</a>
@@ -89,7 +61,6 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
                 <div>No solutions found.</div>
             )}
         </div>
-        
     );
 };
 

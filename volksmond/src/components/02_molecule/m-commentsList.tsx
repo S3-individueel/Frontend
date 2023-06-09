@@ -4,18 +4,22 @@ import IReplyData from '../../types/reply';
 import '../../styles/03_organism/o-discussionsList.scss';
 
 type Props = {
-    parentId?: string | null; // Optional parent ID for nested comments
+    repliesProp?: [] | null; // Optional parent ID for nested comments
+    discussionId?: any | null;
 };
 
-const CommentsList: React.FC<Props> = ({ parentId = null }) => {
+const CommentsList: React.FC<Props> = ({ repliesProp = null, discussionId = null }) => {
     const [replies, setReplies] = useState<IReplyData[]>([]);
 
     useEffect(() => {
-        retrieveAllReplies();
+        if(repliesProp)
+            setReplies(repliesProp);
+        else
+            retrieveAllReplies();
     }, []);
 
     const retrieveAllReplies = (): void => {
-        ReplyDataService.getAll()
+        ReplyDataService.getBySolutionId(discussionId)
             .then((response: any) => {
                 setReplies(response.data);
                 console.log(response.data);
@@ -66,18 +70,14 @@ const CommentsList: React.FC<Props> = ({ parentId = null }) => {
         ReplyDataService.delete(target.id.value);
     };
 
-    const nestedReplies = replies.filter(
-        (reply: IReplyData) => reply.replyId === parentId
-    );
-
     return (
 
         <div className="m-commentsList">
-            {nestedReplies.map((reply: IReplyData, index: number) => (
+            {replies.map((reply: IReplyData, index: number) => (
                 <div key={index}>
                     <span>CitizenId {reply.citizenId}</span>
                     <p>{reply.text}</p>
-                    <CommentsList parentId={reply.id} />
+                    <CommentsList repliesProp={reply.replies} />
                 </div>
             ))}
         </div>
