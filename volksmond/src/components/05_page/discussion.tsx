@@ -69,7 +69,7 @@ const DiscussionPage: React.FC<Props> = () => {
     return (
         <div>
             <h1>{problems?.title}</h1>
-            <span>CitizenId {problems?.citizenId}</span>
+            <span>{problems?.citizen?.firstname} {problems?.citizen?.lastname}</span>
             <p>
                 {problems?.description}
             </p>

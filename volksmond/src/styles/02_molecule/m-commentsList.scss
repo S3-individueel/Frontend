@@ -1,6 +1,8 @@
 .m-commentsList {
     // border-left: 1px solid grey;
     // padding-left: 10px;
+    display: flex;
+    flex-direction: column;
 
     span {
         font-style: italic;

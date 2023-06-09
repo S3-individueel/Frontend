@@ -77,7 +77,7 @@ const CommentsList: React.FC<Props> = ({ repliesProp = null, solutionId = null }
         <div className="m-commentsList">
             {replies.map((reply: IReplyData, index: number) => (
                 <div key={index}>
-                    <span>CitizenId {reply.citizenId}</span>
+                    <span>{reply.citizen?.firstname} {reply.citizen?.lastname}</span>
                     <p>{reply.text}</p>
                     <CommentsList repliesProp={reply.replies} />
                 </div>

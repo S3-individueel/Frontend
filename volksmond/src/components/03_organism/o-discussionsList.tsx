@@ -67,7 +67,7 @@ const DiscussionsList: React.FC<Props> = () => {
             {problems.map((problem: IProblemData, index: number) => (
                 <div className="o-discussionsList__card">
                     <h2>{ problem.title }</h2>
-                    <span>CitizenId { problem.citizenId }</span>
+                    <span>{problem.citizen?.firstname} {problem.citizen?.lastname}</span>
                     <p>{ problem.description }</p>
                     <a href={ "/discussion/" + problem.id }>See discussions</a>
                 </div>

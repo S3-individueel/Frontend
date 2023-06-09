@@ -1,3 +1,5 @@
+import ICitizenData from "./citizen";
+
 export default interface IReplyData {
     id?: any | null,
     citizenId?: any | null,
@@ -8,4 +10,5 @@ export default interface IReplyData {
     isPinned?: boolean,
     replies?: [],
     votes?: [],
+    citizen?: ICitizenData | null,
 }

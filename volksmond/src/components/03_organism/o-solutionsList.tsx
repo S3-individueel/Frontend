@@ -48,7 +48,7 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
                 solutions.map((solution: ISolutionData, index: number) => (
                     <div className="o-solutionsList__card" key={index}>
                         <h3>{solution.title}</h3>
-                        <span>CitizenId {solution.citizenId}</span>
+                        <span>{solution.citizen?.firstname}  {solution.citizen?.lastname}</span>
                         <p>{solution.text}</p>
                         <CommentsList solutionId={solution.id} />
                         <div>
