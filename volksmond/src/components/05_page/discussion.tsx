@@ -10,7 +10,7 @@ type Props = {};
 
 const DiscussionPage: React.FC<Props> = () => {
     const [problems, setProblems] = useState<IProblemData>();
-    const { discussionId } = useParams<{ discussionId: string }>();
+    const { discussionId, solutionId } = useParams<{ discussionId: string, solutionId: string }>();
 
     useEffect(() => {
         retrieveAllCitizens();

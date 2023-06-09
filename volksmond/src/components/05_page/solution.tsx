@@ -10,14 +10,15 @@ type Props = {};
 
 const SolutionPage: React.FC<Props> = () => {
     const [problems, setProblems] = useState<IProblemData>();
-    const { solutionId } = useParams<{ solutionId: string }>();
+    //const { solutionId } = useParams<{ solutionId: string }>();
+    const { solutionId, discussionId } = useParams<{ solutionId: string, discussionId: string }>();
 
     useEffect(() => {
         retrieveSolution();
     }, []);
 
     const retrieveSolution = (): void => {
-        ProblemDataService.get(solutionId)
+        ProblemDataService.get(discussionId)
             .then((response: any) => {
                 setProblems(response.data);
                 console.log(response.data);
@@ -68,7 +69,14 @@ const SolutionPage: React.FC<Props> = () => {
 
     return (
         <div>
-            <h1>SolutionId {solutionId}</h1>
+            <h1>{problems?.title}</h1>
+            <span>CitizenId {problems?.citizenId}</span>
+            <p>
+                {problems?.description}
+            </p>
+            <strong>Referendum starts {problems?.postDate?.toString()}</strong>
+
+            <h2>Suggested solution</h2>
         </div>
     );
 };

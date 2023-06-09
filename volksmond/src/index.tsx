@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: <DiscussionPage />,
       },
       {
-        path: "/solution/:solutionId",
+        path: "/discussion/:discussionId/solution/:solutionId",
         element: <SolutionPage />,
       },
     ],

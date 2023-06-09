@@ -5,21 +5,23 @@ import '../../styles/03_organism/o-discussionsList.scss';
 
 type Props = {
     repliesProp?: [] | null; // Optional parent ID for nested comments
-    discussionId?: any | null;
+    solutionId?: any | null;
 };
 
-const CommentsList: React.FC<Props> = ({ repliesProp = null, discussionId = null }) => {
+const CommentsList: React.FC<Props> = ({ repliesProp = null, solutionId = null }) => {
     const [replies, setReplies] = useState<IReplyData[]>([]);
 
     useEffect(() => {
-        if(repliesProp)
+        if (repliesProp != null) {
             setReplies(repliesProp);
-        else
+        }
+        else {
             retrieveAllReplies();
+        }
     }, []);
 
     const retrieveAllReplies = (): void => {
-        ReplyDataService.getBySolutionId(discussionId)
+        ReplyDataService.getBySolutionId(solutionId)
             .then((response: any) => {
                 setReplies(response.data);
                 console.log(response.data);

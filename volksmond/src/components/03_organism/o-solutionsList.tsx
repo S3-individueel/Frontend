@@ -18,7 +18,7 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
     const retrieveAllSolutions = (): void => {
         SolutionDataService.getByDiscussionId(discussionId)
             .then((response: any) => {
-                setSolutions([response.data]);
+                setSolutions(response.data);
                 console.log("response.data", response.data);
                 console.log("solutions", solutions);
             })
@@ -50,10 +50,10 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
                         <h3>{solution.title}</h3>
                         <span>CitizenId {solution.citizenId}</span>
                         <p>{solution.text}</p>
-                        <CommentsList discussionId={discussionId} />
+                        <CommentsList solutionId={solution.id} />
                         <div>
                             <span>{solution.score} points</span>
-                            <a href={"/solution/" + solution.id}>See all comments</a>
+                            <a href={solution.problemId + "/solution/" + solution.id}>See all comments</a>
                         </div>
                     </div>
                 ))
