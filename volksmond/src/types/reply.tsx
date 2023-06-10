@@ -11,4 +11,5 @@ export default interface IReplyData {
     replies?: [],
     votes?: [],
     citizen?: ICitizenData | null,
+    score?: any | null
 }

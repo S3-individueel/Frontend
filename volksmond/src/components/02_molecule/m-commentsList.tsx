@@ -4,18 +4,22 @@ import IReplyData from '../../types/reply';
 import '../../styles/03_organism/o-discussionsList.scss';
 
 type Props = {
-    repliesProp?: [] | null; // Optional parent ID for nested comments
+    repliesProp?: IReplyData[] | null; // Optional parent ID for nested comments
     solutionId?: any | null;
+    handleReply?: Function | null;
 };
 
-const CommentsList: React.FC<Props> = ({ repliesProp = null, solutionId = null }) => {
+const CommentsList: React.FC<Props> = ({
+    repliesProp = null,
+    solutionId = null,
+    handleReply = null,
+}) => {
     const [replies, setReplies] = useState<IReplyData[]>([]);
 
     useEffect(() => {
         if (repliesProp != null) {
             setReplies(repliesProp);
-        }
-        else {
+        } else {
             retrieveAllReplies();
         }
     }, []);
@@ -24,66 +28,60 @@ const CommentsList: React.FC<Props> = ({ repliesProp = null, solutionId = null }
         ReplyDataService.getBySolutionId(solutionId)
             .then((response: any) => {
                 setReplies(response.data);
-                console.log(response.data);
             })
             .catch((e: Error) => {
-                console.log(e);
+                //console.log(e);
             });
     };
 
-    const postCitizen = (e: React.FormEvent): void => {
-        e.preventDefault();
-
-        const target = e.target as typeof e.target & {
-            id?: { value: Uint32Array },
-            citizenId?: { value: Uint32Array },
-            solutionId?: { value: Uint32Array },
-            replyId?: { value: Uint32Array },
-            text: { value: string },
-            isDeleted?: { value: boolean },
-            isPinned?: { value: boolean }
-        };
-
-        const reply: IReplyData = {
-            id: target.id?.value,
-            citizenId: target.citizenId?.value,
-            solutionId: target.solutionId?.value,
-            replyId: target.replyId?.value,
-            text: target.text.value,
-            isDeleted: target.isDeleted?.value,
-            isPinned: target.isPinned?.value,
-        };
-
-        ReplyDataService.create(reply)
+    const handleVote = (replyId: any, voteType: any) => {
+        ReplyDataService.vote({ replyId: replyId, citizenId: 1, vote: voteType })
             .then((response: any) => {
-                setReplies([...replies, response.data]);
-                console.log(response.data);
+                // Handle the response if necessary
+                console.log(response);
             })
-            .catch((e: Error) => {
-                console.log(e);
+            .catch((error: Error) => {
+                // Handle the error if necessary
+                console.log(error);
             });
     };
 
     const deleteCitizen = (e: React.FormEvent): void => {
         e.preventDefault();
         const target = e.target as typeof e.target & {
-            id: { value: number }
+            id: { value: number };
         };
         ReplyDataService.delete(target.id.value);
     };
 
     return (
-
         <div className="m-commentsList">
             {replies.map((reply: IReplyData, index: number) => (
-                <div key={index}>
-                    <span>{reply.citizen?.firstname} {reply.citizen?.lastname}</span>
-                    <p>{reply.text}</p>
-                    <CommentsList repliesProp={reply.replies} />
-                </div>
+                handleReply ? (
+                    <div key={index}>
+                        <span>{reply.citizen?.firstname} {reply.citizen?.lastname}</span>
+                        <p>{reply.text} <small>...{reply.id}</small></p>
+
+                        <div className="a-votes">
+                            <button onClick={() => handleVote(reply.id, 1)}>^</button>
+                            <span>{reply.score}</span>
+                            <button onClick={() => handleVote(reply.id, -1)}>v</button>
+                        </div>
+
+                        <button onClick={() => handleReply(reply.citizen?.firstname, reply.text, reply.citizenId, reply.id)}>Reply</button>
+
+                        <CommentsList repliesProp={reply.replies} handleReply={handleReply}/>
+                    </div>
+                ) : (
+                    <div key={index}>
+                        <span>{reply.citizen?.firstname} {reply.citizen?.lastname}</span>
+                        <p>{reply.text}</p>
+
+                        <CommentsList repliesProp={reply.replies} />
+                    </div>
+                )
             ))}
         </div>
-
     );
 };
 

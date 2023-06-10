@@ -4,19 +4,35 @@
     display: flex;
     flex-direction: column;
 
-    span {
-        font-style: italic;
-        font-size: .8rem;
-        color: grey;
-    }
-    p {
-        font-size: .9rem;
-        margin-bottom: 5px;
-        padding-bottom: 3px;
-    }
 
     > div {
         border-left: 1px solid grey;
-        padding-left: 10px;
+        padding-left: 15px;
+
+        > span {
+            font-style: italic;
+            font-size: .8rem;
+            color: grey;
+        }
+        
+        > p {
+            font-size: .9rem;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+        }
+
+        .replyVoteForm {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        > button {
+            color: #FF7514;
+            border: none;
+            background-color: unset;
+            text-decoration: underline;
+            font-size: .9rem;
+            cursor: pointer;
+        }
     }
 }
