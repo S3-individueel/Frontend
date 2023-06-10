@@ -44,23 +44,23 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
 
     return (
         <div className="o-solutionsList">
-            {solutions.length > 0 ? (
-                solutions.map((solution: ISolutionData, index: number) => (
-                    <div className="o-solutionsList__card" key={index}>
-                        <h3>{solution.title}</h3>
-                        <span>{solution.citizen?.firstname}  {solution.citizen?.lastname}</span>
-                        <p>{solution.text}</p>
-                        <CommentsList solutionId={solution.id} />
-                        <div>
-                            <span>{solution.score} points</span>
-                            <a href={solution.problemId + "/solution/" + solution.id}>See all comments</a>
-                        </div>
-                    </div>
-                ))
-            ) : (
-                <div>No solutions found.</div>
-            )}
+  {solutions.length > 0 ? (
+    solutions.map((solution: ISolutionData, index: number) => (
+      <div className="o-solutionsList__card" key={index}>
+        <h3>{solution.title}</h3>
+        <span>{solution.citizen?.firstname} {solution.citizen?.lastname}</span>
+        <p>{solution.text}</p>
+        <CommentsList solutionId={solution.id} />
+        <div>
+          <span>{solution.score} points</span>
+          <a href={solution.problemId + "/solution/" + solution.id}>See all comments</a>
         </div>
+      </div>
+    ))
+  ) : (
+    <div>No solutions found.</div>
+  )}
+</div>
     );
 };
 

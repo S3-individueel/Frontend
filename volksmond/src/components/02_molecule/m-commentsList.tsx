@@ -7,12 +7,14 @@ type Props = {
     repliesProp?: IReplyData[] | null; // Optional parent ID for nested comments
     solutionId?: any | null;
     handleReply?: Function | null;
+    sortValue?: string; // Sort value received as prop
 };
 
 const CommentsList: React.FC<Props> = ({
     repliesProp = null,
     solutionId = null,
     handleReply = null,
+    sortValue = '',
 }) => {
     const [replies, setReplies] = useState<IReplyData[]>([]);
 
@@ -23,6 +25,10 @@ const CommentsList: React.FC<Props> = ({
             retrieveAllReplies();
         }
     }, []);
+
+    useEffect(() => {
+        sortReplies();
+    }, [sortValue]);
 
     const retrieveAllReplies = (): void => {
         ReplyDataService.getBySolutionId(solutionId)
@@ -60,8 +66,25 @@ const CommentsList: React.FC<Props> = ({
         ReplyDataService.delete(target.id.value);
     };
 
+    const sortReplies = () => {
+        switch (sortValue) {
+            case 'score':
+                const sortedRepliesByScore = [...replies].sort((a, b) => b.score - a.score);
+                setReplies(sortedRepliesByScore);
+                break;
+            case 'id':
+                const sortedRepliesById = [...replies].sort((a, b) => a.id - b.id);
+                setReplies(sortedRepliesById);
+                break;
+            default:
+                // No sorting or invalid sorting value
+                break;
+        }
+    };
+
     return (
         <div className="m-commentsList">
+
             {replies.map((reply: IReplyData, index: number) =>
                 handleReply ? (
                     <div key={index}>
@@ -84,7 +107,7 @@ const CommentsList: React.FC<Props> = ({
                             Reply
                         </button>
 
-                        <CommentsList repliesProp={reply.replies} handleReply={handleReply} />
+                        <CommentsList repliesProp={reply.replies} handleReply={handleReply} sortValue={sortValue} />
                     </div>
                 ) : (
                     <div key={index} className="m-commentsList--truncate">
@@ -93,7 +116,7 @@ const CommentsList: React.FC<Props> = ({
                         </span>
                         <p>{reply.text}</p>
 
-                        <CommentsList repliesProp={reply.replies} />
+                        <CommentsList repliesProp={reply.replies} sortValue={sortValue} />
                     </div>
                 )
             )}

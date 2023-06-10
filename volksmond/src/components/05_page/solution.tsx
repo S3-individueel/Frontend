@@ -24,6 +24,7 @@ const SolutionPage: React.FC<Props> = () => {
         citizenId: any,
         replyId: any
     }>();
+    const [sortValue, setSortValue] = useState<string>(''); // Sort value for CommentsList
     //const { solutionId } = useParams<{ solutionId: string }>();
     const { solutionId, discussionId } = useParams<{ solutionId: string, discussionId: string }>();
 
@@ -94,6 +95,10 @@ const SolutionPage: React.FC<Props> = () => {
         console.log(selectedReply);
     };
 
+    const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortValue(e.target.value);
+    };
+
     const deleteCitizen = (e: React.FormEvent): void => {
         e.preventDefault();
         const target = e.target as typeof e.target & {
@@ -123,24 +128,33 @@ const SolutionPage: React.FC<Props> = () => {
                     <button>v</button>
                 </div>
 
-                <CommentsList solutionId={solutionId} handleReply={handleReplySelect} />
+                <h4>Comments</h4>
+                <label htmlFor="sort-select">Sort by:</label>
+                <select id="sort-select" value={sortValue} onChange={handleSortChange}>
+                    <option value="">None</option>
+                    <option value="score">Score</option>
+                    <option value="id">ID</option>
+                </select>
 
+                <CommentsList solutionId={solutionId} handleReply={handleReplySelect} sortValue={sortValue} />
 
                 <form onSubmit={postReply}>
-                    {selectedReply && (
+                    {selectedReply ? (
                         <div className="replyShowcase">
-                            <h4>{selectedReply.name}</h4>
+                            <h5>{selectedReply.name}</h5>
                             <p>{selectedReply.text}</p>
-                            <input name="replyId" type="hidden" value={selectedReply.replyId}></input>
+                            <input name="replyId" type="hidden" value={selectedReply.replyId} />
                         </div>
+                    ) : (
+                        <input name="replyId" type="hidden" value="0" />
                     )}
 
                     <label>citizenId</label>
-                    <input name="citizenId" type="number"></input>
-                    <br></br>
+                    <input name="citizenId" type="number" />
+                    <br />
                     <label>Reply</label>
-                    <textarea name="text" placeholder="Type your reply..." required></textarea>
-                    <input name="solutionId" type="hidden" defaultValue={solutionId}></input>
+                    <textarea name="text" placeholder="Type your reply..." required />
+                    <input name="solutionId" type="hidden" defaultValue={solutionId} />
                     <button type="submit">Reply</button>
                 </form>
             </div>

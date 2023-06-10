@@ -6,7 +6,7 @@
 
 
     > div {
-        border-left: 1px solid grey;
+        border-left: 2px solid grey;
         padding-left: 15px;
 
         > span {
@@ -34,7 +34,13 @@
             font-size: .9rem;
             cursor: pointer;
         }
+
+
+        &:hover {
+            border-left: 2px solid #FF7514;
+        }
     }
+
 
     &--truncate {
         > p {
