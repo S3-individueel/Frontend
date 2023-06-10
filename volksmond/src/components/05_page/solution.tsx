@@ -54,6 +54,22 @@ const SolutionPage: React.FC<Props> = () => {
             });
     };
 
+
+    const handleVote = (solutionId: any, voteType: any) => {
+        SolutionDataService.vote({ solutionId: solutionId, citizenId: 1, vote: voteType })
+            .then((response: any) => {
+                // Update the score in the local state
+                if (solution) {
+                    solution.score = response.data.score;
+                    setSolution({ ...solution });
+                }
+            })
+            .catch((error: Error) => {
+                // Handle the error if necessary
+                console.log(error);
+            });
+    };
+
     const postReply = (e: React.FormEvent): void => {
         e.preventDefault();
 
@@ -123,9 +139,9 @@ const SolutionPage: React.FC<Props> = () => {
                 <p>{solution?.text}</p>
 
                 <div className="a-votes">
-                    <button>^</button>
+                    <button onClick={() => handleVote(solution?.id, 1)}>^</button>
                     <span>{solution?.score}</span>
-                    <button>v</button>
+                    <button onClick={() => handleVote(solution?.id, -1)}>v</button>
                 </div>
 
                 <h4>Comments</h4>

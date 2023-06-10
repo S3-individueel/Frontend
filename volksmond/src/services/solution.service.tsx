@@ -33,6 +33,10 @@ class SolutionDataService {
     findByTitle(title: string) {
         return http.get<Array<ISolutionData>>(`/Solutions?title=${title}`);
     }
+
+    vote(vote: { solutionId: any, citizenId: any, vote: any }) {
+        return http.post<any>(`/Solutions/${vote.solutionId}/vote`, vote)
+    }
 }
 
 export default new SolutionDataService();

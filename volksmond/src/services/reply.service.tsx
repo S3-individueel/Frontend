@@ -33,6 +33,7 @@ class ReplyDataService {
     findByTitle(title: string) {
         return http.get<Array<IReplyData>>(`/Replies?title=${title}`);
     }
+    
     vote(vote: {replyId: any, citizenId: any, vote: any}) {
         return http.post<any>(`/Replies/${vote.replyId}/vote`, vote)
     }
