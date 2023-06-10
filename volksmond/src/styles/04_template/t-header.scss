@@ -14,14 +14,23 @@
         align-items: center;
         justify-content: flex-start;
 
-        > a {
-            img {
-                background-color: grey;
-                height: 45px;
-                aspect-ratio: 1;
-                //filter: contrast(1000);
-                border-radius: 100%;
-                filter: invert(1);
+        .t-header__user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            > a {
+                img {
+                    background-color: grey;
+                    height: 45px;
+                    aspect-ratio: 1;
+                    //filter: contrast(1000);
+                    border-radius: 100%;
+                    filter: invert(1);
+                }
+            }
+
+            input[type='number'] {
+                width: 60px;
             }
         }
     }

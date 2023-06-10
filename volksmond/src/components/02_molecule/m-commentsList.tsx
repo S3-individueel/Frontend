@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ReplyDataService from "../../services/reply.service";
 import IReplyData from '../../types/reply';
 import '../../styles/03_organism/o-discussionsList.scss';
+import CitizenIdContext from '../../context/CitizenIdContext';
 
 type Props = {
     repliesProp?: IReplyData[] | null; // Optional parent ID for nested comments
@@ -17,6 +18,7 @@ const CommentsList: React.FC<Props> = ({
     sortValue = '',
 }) => {
     const [replies, setReplies] = useState<IReplyData[]>([]);
+    const citizenId = useContext(CitizenIdContext);
 
     useEffect(() => {
         if (repliesProp != null) {
@@ -41,7 +43,7 @@ const CommentsList: React.FC<Props> = ({
     };
 
     const handleVote = (replyId: any, voteType: any) => {
-        ReplyDataService.vote({ replyId: replyId, citizenId: 1, vote: voteType })
+        ReplyDataService.vote({ replyId: replyId, citizenId: citizenId, vote: voteType })
             .then((response: any) => {
                 // Update the score in the local state
                 const updatedReplies = replies.map((reply) => {

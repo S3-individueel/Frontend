@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ProblemDataService from "../../services/problem.service";
 import SolutionDataService from "../../services/solution.service";
 import ReplyDataService from "../../services/reply.service";
@@ -11,6 +11,7 @@ import '../../styles/02_molecule/m-commentsList.scss'
 import { useParams } from "react-router-dom";
 import SolutionsList from "../03_organism/o-solutionsList";
 import CommentsList from "../02_molecule/m-commentsList";
+import CitizenIdContext from '../../context/CitizenIdContext';
 
 type Props = {};
 
@@ -25,8 +26,8 @@ const SolutionPage: React.FC<Props> = () => {
         replyId: any
     }>();
     const [sortValue, setSortValue] = useState<string>(''); // Sort value for CommentsList
-    //const { solutionId } = useParams<{ solutionId: string }>();
     const { solutionId, discussionId } = useParams<{ solutionId: string, discussionId: string }>();
+    const citizenId = useContext(CitizenIdContext);
 
     useEffect(() => {
         retrieveProblem();
@@ -56,7 +57,7 @@ const SolutionPage: React.FC<Props> = () => {
 
 
     const handleVote = (solutionId: any, voteType: any) => {
-        SolutionDataService.vote({ solutionId: solutionId, citizenId: 1, vote: voteType })
+        SolutionDataService.vote({ solutionId: solutionId, citizenId: citizenId, vote: voteType })
             .then((response: any) => {
                 // Update the score in the local state
                 if (solution) {
@@ -165,12 +166,9 @@ const SolutionPage: React.FC<Props> = () => {
                         <input name="replyId" type="hidden" value="0" />
                     )}
 
-                    <label>citizenId</label>
-                    <input name="citizenId" type="number" />
-                    <br />
-                    <label>Reply</label>
                     <textarea name="text" placeholder="Type your reply..." required />
                     <input name="solutionId" type="hidden" defaultValue={solutionId} />
+                    <input name="citizenId" type="hidden" value={citizenId} />
                     <button type="submit">Reply</button>
                 </form>
             </div>
