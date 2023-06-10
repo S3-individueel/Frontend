@@ -37,8 +37,14 @@ const CommentsList: React.FC<Props> = ({
     const handleVote = (replyId: any, voteType: any) => {
         ReplyDataService.vote({ replyId: replyId, citizenId: 1, vote: voteType })
             .then((response: any) => {
-                // Handle the response if necessary
-                console.log(response);
+                // Update the score in the local state
+                const updatedReplies = replies.map((reply) => {
+                    if (reply.id === replyId) {
+                        return { ...reply, score: response.data.score };
+                    }
+                    return reply;
+                });
+                setReplies(updatedReplies);
             })
             .catch((error: Error) => {
                 // Handle the error if necessary
@@ -56,11 +62,13 @@ const CommentsList: React.FC<Props> = ({
 
     return (
         <div className="m-commentsList">
-            {replies.map((reply: IReplyData, index: number) => (
+            {replies.map((reply: IReplyData, index: number) =>
                 handleReply ? (
                     <div key={index}>
-                        <span>{reply.citizen?.firstname} {reply.citizen?.lastname}</span>
-                        <p>{reply.text} <small>...{reply.id}</small></p>
+                        <span>
+                            {reply.citizen?.firstname} {reply.citizen?.lastname}
+                        </span>
+                        <p>{reply.text}</p>
 
                         <div className="a-votes">
                             <button onClick={() => handleVote(reply.id, 1)}>^</button>
@@ -68,19 +76,27 @@ const CommentsList: React.FC<Props> = ({
                             <button onClick={() => handleVote(reply.id, -1)}>v</button>
                         </div>
 
-                        <button onClick={() => handleReply(reply.citizen?.firstname, reply.text, reply.citizenId, reply.id)}>Reply</button>
+                        <button
+                            onClick={() =>
+                                handleReply(reply.citizen?.firstname, reply.text, reply.citizenId, reply.id)
+                            }
+                        >
+                            Reply
+                        </button>
 
-                        <CommentsList repliesProp={reply.replies} handleReply={handleReply}/>
+                        <CommentsList repliesProp={reply.replies} handleReply={handleReply} />
                     </div>
                 ) : (
-                    <div key={index}>
-                        <span>{reply.citizen?.firstname} {reply.citizen?.lastname}</span>
+                    <div key={index} className="m-commentsList--truncate">
+                        <span>
+                            {reply.citizen?.firstname} {reply.citizen?.lastname}
+                        </span>
                         <p>{reply.text}</p>
 
                         <CommentsList repliesProp={reply.replies} />
                     </div>
                 )
-            ))}
+            )}
         </div>
     );
 };

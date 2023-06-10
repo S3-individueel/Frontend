@@ -17,8 +17,8 @@
         
         > p {
             font-size: .9rem;
-            margin-bottom: 5px;
-            padding-bottom: 3px;
+            padding-bottom: 0;
+            margin-bottom: 0;
         }
 
         .replyVoteForm {
@@ -33,6 +33,17 @@
             text-decoration: underline;
             font-size: .9rem;
             cursor: pointer;
+        }
+    }
+
+    &--truncate {
+        > p {
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            margin-bottom: 5px;
         }
     }
 }
