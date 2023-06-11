@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SolutionDataService from "../../services/solution.service";
 import ISolutionData from '../../types/solution';
-import '../../styles/03_organism/o-discussionsList.scss';
+import '../../styles/03_organism/o-referendumVote.scss';
 import CommentsList from '../02_molecule/m-commentsList';
 
 type Props = {

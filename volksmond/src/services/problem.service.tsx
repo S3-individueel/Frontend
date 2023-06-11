@@ -29,6 +29,10 @@ class ProblemDataService {
     findByTitle(title: string) {
         return http.get<Array<IProblemData>>(`/Problems?title=${title}`);
     }
+
+    vote(vote: { problemId: any, solutionId: any, citizenId: any }) {
+        return http.post<any>(`/Problems/${vote.problemId}/vote`, vote)
+    }
 }
 
 export default new ProblemDataService();

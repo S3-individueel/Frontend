@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ProblemDataService from "../../services/problem.service";
 import IProblemData from '../../types/problem';
+import IReferendumData from '../../types/referendum';
 import '../../styles/03_organism/o-solutionsList.scss'
 import '../../styles/02_molecule/m-commentsList.scss'
 import { useParams } from "react-router-dom";
 import SolutionsList from "../03_organism/o-solutionsList";
+import ReferendumVoting from "../03_organism/o-referendumVoting";
 import SolutionDataService from "../../services/solution.service";
-
 type Props = {};
 
 const DiscussionPage: React.FC<Props> = () => {
@@ -16,10 +17,10 @@ const DiscussionPage: React.FC<Props> = () => {
     const [solutionText, setSolutionText] = useState("");
 
     useEffect(() => {
-        retrieveAllCitizens();
+        retrieveProblem();
     }, []);
 
-    const retrieveAllCitizens = (): void => {
+    const retrieveProblem = (): void => {
         ProblemDataService.get(discussionId)
             .then((response: any) => {
                 setProblems(response.data);
@@ -108,7 +109,40 @@ const DiscussionPage: React.FC<Props> = () => {
             <p>
                 {problems?.description}
             </p>
-            <strong>Referendum starts {problems?.referendum?.toString()}</strong>
+            {problems?.referendums?.map((referendum: IReferendumData, index: number) => {
+                const votingStart = referendum.votingStart ? new Date(referendum.votingStart) : null;
+                const votingEnd = referendum.votingEnd ? new Date(referendum.votingEnd) : null;
+
+                if(referendum.active){
+                    return (
+                        <div>
+                            <strong key={index}>
+                                Voting ends {votingEnd?.toLocaleDateString()} {votingEnd?.toLocaleTimeString()} 
+                            </strong>
+
+                            <div>
+                                <ReferendumVoting discussionId={discussionId} />
+                            </div>
+                        </div>
+                    );
+                } else if (referendum.ended) {
+                    return (
+                        <div>
+                            <h2>winner:</h2>
+                            <h1>{referendum.winningSolution?.title}</h1>
+                            <strong key={index}>
+                                Voting ended {votingEnd?.toLocaleDateString()} {votingEnd?.toLocaleTimeString()}
+                            </strong>
+                        </div>
+                    );
+                } else {
+                    return (
+                        <strong key={index}>
+                            Referendum starts from {votingStart?.toLocaleDateString()} {votingStart?.toLocaleTimeString()} till {votingEnd?.toLocaleDateString()} {votingEnd?.toLocaleTimeString()}
+                        </strong>
+                    );
+                }
+            })}
 
             <h2>Create solution</h2>
             <form onSubmit={createSolution}>

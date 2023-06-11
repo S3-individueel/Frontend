@@ -8,5 +8,5 @@ export default interface IProblemData {
     description: string,
     postDate?: Date,
     citizen?: ICitizenData,
-    referendum?: IReferendumData
+    referendums?: IReferendumData[]
 }
