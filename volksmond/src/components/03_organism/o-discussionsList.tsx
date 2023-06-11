@@ -69,7 +69,7 @@ const DiscussionsList: React.FC<Props> = () => {
                     <h2>{ problem.title }</h2>
                     <span>{problem.citizen?.firstname} {problem.citizen?.lastname}</span>
                     <p>{ problem.description }</p>
-                    <a href={ "/discussion/" + problem.id }>See discussions</a>
+                    <a href={ "/discussion/" + problem.id }>See discussion</a>
                 </div>
             ))}
         </div>

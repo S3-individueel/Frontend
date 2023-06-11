@@ -1,4 +1,5 @@
 import ICitizenData from "./citizen";
+import IReferendumData from "./referendum";
 
 export default interface IProblemData {
     id?: any | null,
@@ -6,5 +7,6 @@ export default interface IProblemData {
     title: string,
     description: string,
     postDate?: Date,
-    citizen?: ICitizenData
+    citizen?: ICitizenData,
+    referendum?: IReferendumData
 }

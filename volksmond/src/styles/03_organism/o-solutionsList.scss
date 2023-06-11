@@ -19,6 +19,11 @@
         }
         p {
             margin-bottom: 20px;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+            display: -webkit-box;
+            text-overflow: ellipsis;
         }
         
         > div:last-of-type{

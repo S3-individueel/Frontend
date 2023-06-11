@@ -108,7 +108,7 @@ const DiscussionPage: React.FC<Props> = () => {
             <p>
                 {problems?.description}
             </p>
-            <strong>Referendum starts {problems?.postDate?.toString()}</strong>
+            <strong>Referendum starts {problems?.referendum?.toString()}</strong>
 
             <h2>Create solution</h2>
             <form onSubmit={createSolution}>

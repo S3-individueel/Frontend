@@ -77,14 +77,14 @@ const SolutionPage: React.FC<Props> = () => {
         const target = e.target as typeof e.target & {
             text: { value: string };
             citizenId: { value: number };
-            replyId: { value: number };
+            replyId?: { value: number };
             solutionId: { value: number };
         };
 
         const reply: IReplyData = {
             text: target.text.value,
             citizenId: target.citizenId.value,
-            replyId: target.replyId.value,
+            replyId: target.replyId?.value,
             solutionId: target.solutionId.value,
         };
 
@@ -163,7 +163,8 @@ const SolutionPage: React.FC<Props> = () => {
                             <input name="replyId" type="hidden" value={selectedReply.replyId} />
                         </div>
                     ) : (
-                        <input name="replyId" type="hidden" value="0" />
+                        // <input name="replyId" type="hidden" value="0" />
+                        <span>hi</span>
                     )}
 
                     <textarea name="text" placeholder="Type your reply..." required />

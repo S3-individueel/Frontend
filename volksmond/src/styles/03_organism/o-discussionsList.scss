@@ -22,6 +22,11 @@
         p {
             font-size: 1rem;
             margin-bottom: 25px;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+            display: -webkit-box;
+            text-overflow: ellipsis;
         }
         a {
             display: inline-block;

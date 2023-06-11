@@ -87,8 +87,8 @@ const CommentsList: React.FC<Props> = ({
     return (
         <div className="m-commentsList">
 
-            {replies.map((reply: IReplyData, index: number) =>
-                handleReply ? (
+            {handleReply ? (
+                replies.map((reply: IReplyData, index: number) =>
                     <div key={index}>
                         <span>
                             {reply.citizen?.firstname} {reply.citizen?.lastname}
@@ -111,17 +111,20 @@ const CommentsList: React.FC<Props> = ({
 
                         <CommentsList repliesProp={reply.replies} handleReply={handleReply} sortValue={sortValue} />
                     </div>
-                ) : (
+                )    
+            ) : (
+                replies.slice(0,1).map((reply: IReplyData, index: number) =>
                     <div key={index} className="m-commentsList--truncate">
                         <span>
                             {reply.citizen?.firstname} {reply.citizen?.lastname}
                         </span>
                         <p>{reply.text}</p>
 
-                        <CommentsList repliesProp={reply.replies} sortValue={sortValue} />
+                        <CommentsList repliesProp={reply.replies?.slice(0, 1)} sortValue={sortValue} />
                     </div>
                 )
             )}
+
         </div>
     );
 };

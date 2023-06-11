@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import CitizenDataService from "../../services/citizen.service";
+import ProblemDataService from "../../services/problem.service";
 import ICitizenData from '../../types/citizen';
+import IProblemData from '../../types/problem';
 import DiscussionsList from '../03_organism/o-discussionsList'
+import CitizenIdContext from '../../context/CitizenIdContext';
 
 type Props = {};
 
 const HomePage: React.FC<Props> = () => {
     const [citizens, setCitizens] = useState<ICitizenData[]>([]);
+    const citizenId = useContext(CitizenIdContext);
 
     useEffect(() => {
         retrieveAllCitizens();
@@ -54,6 +58,35 @@ const HomePage: React.FC<Props> = () => {
             });
     };
 
+    const postProblem = (e: React.FormEvent): void => {
+        e.preventDefault();
+
+        const target = e.target as typeof e.target & {
+            id: { value: Uint32Array },
+            citizenId: { value: Uint32Array },
+            title: { value: string },
+            postDate?: { value: Date },
+            description: { value: string },
+            photo: { value: string }
+        };
+
+        const problem: IProblemData = {
+            id: target.id?.value,
+            citizenId: target.citizenId.value,
+            title: target.title.value,
+            postDate: target.postDate?.value,
+            description: target.description.value,
+        };
+
+        ProblemDataService.create(problem)
+            .then((response: any) => {
+                console.log(response.data);
+            })
+            .catch((e: Error) => {
+                console.log(e);
+            });
+    };
+
     const deleteCitizen = (e: React.FormEvent): void => {
         e.preventDefault();
         const target = e.target as typeof e.target & {
@@ -70,7 +103,20 @@ const HomePage: React.FC<Props> = () => {
                 <h2 key={index}>#{citizen.id + " " + citizen.firstname + ' ' + citizen.lastname}</h2>
             ))}
 
+
+            <form name="problem" onSubmit={postProblem}>
+                <h2>Create discussion</h2>
+                <input name="id" type="hidden" defaultValue="0"></input>
+                <input name="citizenId" defaultValue={citizenId} type="hidden"></input>
+                <input name="title" defaultValue="" type="text" placeholder="Title"></input>
+                <input name="description" defaultValue="" type="text" placeholder="Description"></input>
+                {/* <input name="postDate" defaultValue={new Date().toString()} type="text" placeholder="date of birth"></input> */}
+                <input name="postDate" defaultValue="2023-06-01T00:27:22.626Z" type="text" placeholder="date of birth"></input>
+                <button type="submit">Submit</button>
+            </form>
+
             <form name="citizen" onSubmit={postCitizen}>
+                <h2>Create citizen</h2>
                 <input name="id" type="hidden" defaultValue="0"></input>
                 <input name="firstname" defaultValue="Che" type="text" id="firstname" placeholder="firstname"></input>
                 <input name="lastname" defaultValue="Guevara" type="text" id="lastname" placeholder="lastname"></input>
