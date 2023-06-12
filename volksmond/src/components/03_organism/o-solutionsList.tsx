@@ -40,7 +40,7 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
               <CommentsList solutionId={solution.id} />
               <div>
                 <span>{solution.score} points</span>
-                <Link to={solution.problemId + "/solution/" + solution.id}>See all comments</Link>
+                <Link to={"/discussion/" + solution.problemId + "/solution/" + solution.id}>See all comments</Link>
               </div>
             </div>
           ))

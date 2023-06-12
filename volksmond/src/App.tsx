@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import React, { useState } from "react";
 import userIcon from './assets/icons/user.png';
 import searchIcon from './assets/icons/magnifying-glass.png';
@@ -16,9 +16,9 @@ function App() {
         <header className="t-header">
           <div>
             <div className="t-header__user">
-              <a href='/'>
+              <Link to='/'>
                 <img src={userIcon} className="App-logo" alt="logo" />
-              </a>
+              </Link>
               <input type='number' name='citizenId' defaultValue={citizenId} onChange={e => setCitizenId(Number(e.target.value))}></input>
             </div>
 
