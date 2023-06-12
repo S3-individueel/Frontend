@@ -1,8 +1,8 @@
 # Base image
-FROM node:14-alpine
+FROM node:alpine
 
 # Set working directory
-WORKDIR /volksmond
+WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
