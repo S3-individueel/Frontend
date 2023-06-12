@@ -39,4 +39,5 @@ class SolutionDataService {
     }
 }
 
-export default new SolutionDataService();
+const solutionDataService = new SolutionDataService();
+export default solutionDataService;

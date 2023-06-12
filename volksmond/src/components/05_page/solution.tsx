@@ -9,7 +9,6 @@ import '../../styles/05_page/p-solution.scss'
 import '../../styles/03_organism/o-solutionsList.scss'
 import '../../styles/02_molecule/m-commentsList.scss'
 import { useParams } from "react-router-dom";
-import SolutionsList from "../03_organism/o-solutionsList";
 import CommentsList from "../02_molecule/m-commentsList";
 import CitizenIdContext from '../../context/CitizenIdContext';
 
@@ -114,14 +113,6 @@ const SolutionPage: React.FC<Props> = () => {
 
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSortValue(e.target.value);
-    };
-
-    const deleteCitizen = (e: React.FormEvent): void => {
-        e.preventDefault();
-        const target = e.target as typeof e.target & {
-            id: { value: number }
-        };
-        ProblemDataService.delete(target.id.value);
     };
 
     return (

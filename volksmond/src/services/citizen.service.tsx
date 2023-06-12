@@ -31,4 +31,5 @@ class CitizenDataService {
     }
 }
 
-export default new CitizenDataService();
+const citizenDataService = new CitizenDataService();
+export default citizenDataService;

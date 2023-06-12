@@ -20,17 +20,6 @@ const CommentsList: React.FC<Props> = ({
     const [replies, setReplies] = useState<IReplyData[]>([]);
     const citizenId = useContext(CitizenIdContext);
 
-    useEffect(() => {
-        if (repliesProp != null) {
-            setReplies(repliesProp);
-        } else {
-            retrieveAllReplies();
-        }
-    }, []);
-
-    useEffect(() => {
-        sortReplies();
-    }, [sortValue]);
 
     const retrieveAllReplies = (): void => {
         ReplyDataService.getBySolutionId(solutionId)
@@ -59,15 +48,7 @@ const CommentsList: React.FC<Props> = ({
                 console.log(error);
             });
     };
-
-    const deleteCitizen = (e: React.FormEvent): void => {
-        e.preventDefault();
-        const target = e.target as typeof e.target & {
-            id: { value: number };
-        };
-        ReplyDataService.delete(target.id.value);
-    };
-
+    
     const sortReplies = () => {
         switch (sortValue) {
             case 'score':
@@ -83,6 +64,18 @@ const CommentsList: React.FC<Props> = ({
                 break;
         }
     };
+
+    useEffect(() => {
+        if (repliesProp != null) {
+            setReplies(repliesProp);
+        } else {
+            retrieveAllReplies();
+        }
+    }, [repliesProp, retrieveAllReplies]);
+
+    useEffect(() => {
+        sortReplies();
+    }, [sortValue, sortReplies]);
 
     return (
         <div className="m-commentsList">

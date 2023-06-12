@@ -39,4 +39,5 @@ class ReplyDataService {
     }
 }
 
-export default new ReplyDataService();
+const replyDataService = new ReplyDataService();
+export default replyDataService;

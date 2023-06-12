@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Routes, NavLink, Outlet } from 'react-router-dom';
-import React, { useState, useEffect } from "react";
+import { Outlet } from 'react-router-dom';
+import React, { useState } from "react";
 import userIcon from './assets/icons/user.png';
 import searchIcon from './assets/icons/magnifying-glass.png';
 import './styles/reset.scss';
@@ -25,7 +25,7 @@ function App() {
             <div className='a-searchBar'>
               <form>
                 <input type='text' placeholder='Search for a topic...' />
-                <button type='submit'><img src={searchIcon} /></button>
+                <button type='submit'><img src={searchIcon} alt='search icon'/></button>
               </form>
             </div>
           </div>

@@ -35,4 +35,5 @@ class ProblemDataService {
     }
 }
 
-export default new ProblemDataService();
+const problemDataService = new ProblemDataService();
+export default problemDataService;

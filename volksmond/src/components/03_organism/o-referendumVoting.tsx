@@ -2,9 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import SolutionDataService from "../../services/solution.service";
 import ProblemDataService from "../../services/problem.service";
 import ISolutionData from '../../types/solution';
-import IProblemData from '../../types/problem';
 import '../../styles/03_organism/o-discussionsList.scss';
-import CommentsList from '../02_molecule/m-commentsList';
 import CitizenIdContext from '../../context/CitizenIdContext';
 
 type Props = {
@@ -52,14 +50,6 @@ const ReferendumVoting: React.FC<Props> = ({ discussionId = null }) => {
         .catch((e: Error) => {
           console.log(e);
         });
-    };
-
-    const deleteCitizen = (e: React.FormEvent): void => {
-        e.preventDefault();
-        const target = e.target as typeof e.target & {
-            id: { value: number }
-        };
-        SolutionDataService.delete(target.id.value);
     };
 
     return (
