@@ -1,15 +1,19 @@
 .p-solution {
     h1 {
-
+        margin-bottom: 0px;
     }
-    span {
-
+    > span {
+        font-style: italic;
+        font-weight: bolder;
+        font-size: 1.2rem;
+        color: grey;
     }
-    p {
-
+    > p {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
     strong {
-
+        padding-bottom: 10px;
     }
 
     > div {
@@ -17,6 +21,11 @@
         padding: 40px;
         background-color: #283440;
         border: 1px solid #303F4D;
+        
+        >h2 {
+            color: #FF7514;
+            font-size: 2rem;
+        }
         h3 {
             font-size: 1.5rem;
         }
@@ -45,7 +54,6 @@
 .a-votes {
     display: inline-flex;
     align-items: center;
-    margin-bottom: 5px;
     margin-right: 10px;
 
     button{
