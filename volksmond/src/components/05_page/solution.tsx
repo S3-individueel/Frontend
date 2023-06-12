@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import ProblemDataService from "../../services/problem.service";
 import SolutionDataService from "../../services/solution.service";
 import ReplyDataService from "../../services/reply.service";
@@ -28,12 +28,8 @@ const SolutionPage: React.FC<Props> = () => {
     const { solutionId, discussionId } = useParams<{ solutionId: string, discussionId: string }>();
     const citizenId = useContext(CitizenIdContext);
 
-    useEffect(() => {
-        retrieveProblem();
-        retrieveSolution();
-    }, []);
 
-    const retrieveProblem = (): void => {
+    const retrieveProblem = useCallback((): void => {
         ProblemDataService.get(discussionId)
             .then((response: any) => {
                 setProblems(response.data);
@@ -42,8 +38,9 @@ const SolutionPage: React.FC<Props> = () => {
             .catch((e: Error) => {
                 console.log(e);
             });
-    };
-    const retrieveSolution = (): void => {
+    }, [discussionId]);
+
+    const retrieveSolution = useCallback((): void => {
         SolutionDataService.get(solutionId)
             .then((response: any) => {
                 setSolution(response.data);
@@ -52,7 +49,12 @@ const SolutionPage: React.FC<Props> = () => {
             .catch((e: Error) => {
                 console.log(e);
             });
-    };
+    }, [solutionId]);
+
+    useEffect(() => {
+        retrieveProblem();
+        retrieveSolution();
+    }, [retrieveProblem, retrieveSolution]);
 
 
     const handleVote = (solutionId: any, voteType: any) => {

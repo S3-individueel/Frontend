@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import ProblemDataService from "../../services/problem.service";
 import IProblemData from '../../types/problem';
 import '../../styles/03_organism/o-discussionsList.scss';
@@ -8,7 +8,7 @@ type Props = {};
 const DiscussionsList: React.FC<Props> = () => {
     const [problems, setProblems] = useState<IProblemData[]>([]);
 
-    const retrieveAllProblems = (): void => {
+    const retrieveAllProblems = useCallback((): void => {
         ProblemDataService.getAll()
             .then((response: any) => {
                 setProblems(response.data);
@@ -17,7 +17,7 @@ const DiscussionsList: React.FC<Props> = () => {
             .catch((e: Error) => {
                 console.log(e);
             });
-    };
+    }, []);
 
     useEffect(() => {
         retrieveAllProblems();

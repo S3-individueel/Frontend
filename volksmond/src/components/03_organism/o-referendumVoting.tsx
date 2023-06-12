@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import SolutionDataService from "../../services/solution.service";
 import ProblemDataService from "../../services/problem.service";
 import ISolutionData from '../../types/solution';
@@ -13,21 +13,21 @@ const ReferendumVoting: React.FC<Props> = ({ discussionId = null }) => {
   const [solutions, setSolutions] = useState<ISolutionData[]>([]);
   const citizenId = useContext(CitizenIdContext);
 
-    useEffect(() => {
-        retrieveAllSolutions();
-    }, []);
+  const retrieveAllSolutions = useCallback((): void => {
+    SolutionDataService.getByDiscussionId(discussionId)
+      .then((response: any) => {
+        setSolutions(response.data);
+        console.log("response.data", response.data);
+        console.log("solutions", solutions);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  }, [discussionId, solutions]);
 
-    const retrieveAllSolutions = (): void => {
-        SolutionDataService.getByDiscussionId(discussionId)
-            .then((response: any) => {
-                setSolutions(response.data);
-                console.log("response.data", response.data);
-                console.log("solutions", solutions);
-            })
-            .catch((e: Error) => {
-                console.log(e);
-            });
-    };
+  useEffect(() => {
+    retrieveAllSolutions();
+  }, [retrieveAllSolutions]);
 
   const handleVote = (e: React.FormEvent): void => {
     e.preventDefault();

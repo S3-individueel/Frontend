@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ProblemDataService from "../../services/problem.service";
 import IProblemData from '../../types/problem';
 import IReferendumData from '../../types/referendum';
@@ -17,7 +17,7 @@ const DiscussionPage: React.FC<Props> = () => {
     const [solutionText, setSolutionText] = useState("");
 
 
-    const retrieveProblem = (): void => {
+    const retrieveProblem = useCallback((): void => {
         ProblemDataService.get(discussionId)
             .then((response: any) => {
                 setProblems(response.data);
@@ -26,7 +26,7 @@ const DiscussionPage: React.FC<Props> = () => {
             .catch((e: Error) => {
                 console.log(e);
             });
-    };
+    }, [discussionId]);
 
     useEffect(() => {
         retrieveProblem();

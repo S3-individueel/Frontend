@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import ReplyDataService from "../../services/reply.service";
 import IReplyData from '../../types/reply';
 import '../../styles/03_organism/o-discussionsList.scss';
@@ -21,7 +21,7 @@ const CommentsList: React.FC<Props> = ({
     const citizenId = useContext(CitizenIdContext);
 
 
-    const retrieveAllReplies = (): void => {
+    const retrieveAllReplies = useCallback((): void => {
         ReplyDataService.getBySolutionId(solutionId)
             .then((response: any) => {
                 setReplies(response.data);
@@ -29,7 +29,7 @@ const CommentsList: React.FC<Props> = ({
             .catch((e: Error) => {
                 //console.log(e);
             });
-    };
+    }, [solutionId]);
 
     const handleVote = (replyId: any, voteType: any) => {
         ReplyDataService.vote({ replyId: replyId, citizenId: citizenId, vote: voteType })
@@ -49,7 +49,7 @@ const CommentsList: React.FC<Props> = ({
             });
     };
     
-    const sortReplies = () => {
+    const sortReplies = useCallback(() => {
         switch (sortValue) {
             case 'score':
                 const sortedRepliesByScore = [...replies].sort((a, b) => b.score - a.score);
@@ -63,7 +63,7 @@ const CommentsList: React.FC<Props> = ({
                 // No sorting or invalid sorting value
                 break;
         }
-    };
+    }, [replies, sortValue]);
 
     useEffect(() => {
         if (repliesProp != null) {

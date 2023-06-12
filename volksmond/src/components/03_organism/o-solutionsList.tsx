@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import SolutionDataService from "../../services/solution.service";
 import ISolutionData from '../../types/solution';
 import '../../styles/03_organism/o-referendumVote.scss';
@@ -12,7 +12,7 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
   const [solutions, setSolutions] = useState<ISolutionData[]>([]);
 
 
-  const retrieveAllSolutions = (): void => {
+  const retrieveAllSolutions = useCallback((): void => {
     SolutionDataService.getByDiscussionId(discussionId)
       .then((response: any) => {
         setSolutions(response.data);
@@ -22,7 +22,8 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
       .catch((e: Error) => {
         console.log(e);
       });
-  };
+  }, [discussionId, solutions]);
+
   useEffect(() => {
     retrieveAllSolutions();
   }, [retrieveAllSolutions]);
