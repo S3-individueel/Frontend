@@ -4,15 +4,28 @@
     display: flex;
     flex-direction: column;
 
-
     > div {
+        //border: 1px solid rgba(grey, .2);
         border-left: 2px solid grey;
-        padding-left: 15px;
+        padding: 15px 15px 0;
 
         > span {
+            display: flex;
+            align-items: center;
+
             font-style: italic;
+            font-weight: bolder;
             font-size: .8rem;
             color: grey;
+
+            img {
+                display: inline-block;
+                height: 40px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 10px;
+            }
         }
         
         > p {
@@ -33,8 +46,8 @@
             text-decoration: underline;
             font-size: .9rem;
             cursor: pointer;
+            margin-bottom: 15px;
         }
-
 
         &:hover {
             border-left: 2px solid #FF7514;
@@ -43,13 +56,14 @@
 
 
     &--truncate {
+        padding: 15px;
         > p {
             overflow: hidden;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 5;
             display: -webkit-box;
             text-overflow: ellipsis;
-            margin-bottom: 5px;
+            margin-bottom: 15px!important;
         }
     }
 }

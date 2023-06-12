@@ -84,6 +84,7 @@ const CommentsList: React.FC<Props> = ({
                 replies.map((reply: IReplyData, index: number) =>
                     <div key={index}>
                         <span>
+                            <img src={reply.citizen?.photo} alt={"Photo of "+reply.citizen?.firstname} />
                             {reply.citizen?.firstname} {reply.citizen?.lastname}
                         </span>
                         <p>{reply.text}</p>
