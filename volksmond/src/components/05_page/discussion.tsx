@@ -128,11 +128,11 @@ const DiscussionPage: React.FC<Props> = () => {
                 } else if (referendum.ended) {
                     return (
                         <div>
-                            <h2>winner:</h2>
-                            <h1>{referendum.winningSolution?.title}</h1>
                             <strong key={index}>
                                 Voting ended {votingEnd?.toLocaleDateString()} {votingEnd?.toLocaleTimeString()}
                             </strong>
+                            <h2>winner:</h2>
+                            <h1>{referendum.winningSolution?.title}</h1>
                         </div>
                     );
                 } else {
