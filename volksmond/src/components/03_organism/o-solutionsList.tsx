@@ -3,6 +3,7 @@ import SolutionDataService from "../../services/solution.service";
 import ISolutionData from '../../types/solution';
 import '../../styles/03_organism/o-referendumVote.scss';
 import CommentsList from '../02_molecule/m-commentsList';
+import { Link } from "react-router-dom";
 
 type Props = {
     discussionId?: string | null;
@@ -39,7 +40,7 @@ const SolutionsList: React.FC<Props> = ({ discussionId = null }) => {
               <CommentsList solutionId={solution.id} />
               <div>
                 <span>{solution.score} points</span>
-                <a href={solution.problemId + "/solution/" + solution.id}>See all comments</a>
+                <Link to={solution.problemId + "/solution/" + solution.id}>See all comments</Link>
               </div>
             </div>
           ))
