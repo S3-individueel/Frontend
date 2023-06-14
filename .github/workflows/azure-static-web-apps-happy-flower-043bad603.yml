@@ -23,6 +23,7 @@ jobs:
         working-directory: ./volksmond
         run: npm install
       - name: Run tests
+        working-directory: ./volksmond
         run: npm test
       - name: Build And Deploy
         id: builddeploy
