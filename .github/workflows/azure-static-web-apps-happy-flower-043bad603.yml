@@ -20,8 +20,12 @@ jobs:
         with:
           submodules: true
       - name: Install dependencies
+        with:
+          app_location: "/volksmond"
         run: npm install
       - name: Run tests
+        with:
+          app_location:
         run: npm test
       - name: Build And Deploy
         id: builddeploy
