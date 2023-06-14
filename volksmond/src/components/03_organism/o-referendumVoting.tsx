@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useCallback } from "react";
 import SolutionDataService from "../../services/solution.service";
 import ProblemDataService from "../../services/problem.service";
 import ISolutionData from '../../types/solution';
-import '../../styles/03_organism/o-discussionsList.scss';
+//import '../../styles/03_organism/o-discussionsList.scss';
 import CitizenIdContext from '../../context/CitizenIdContext';
 
 type Props = {
